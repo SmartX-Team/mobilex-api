@@ -43,7 +43,7 @@ spec:
             - name: MODEL_ID
               # value: yanolja/EEVE-Korean-Instruct-10.8B-v1.0
               # value: beomi/Llama-3-Open-Ko-8B-Instruct-preview
-              value: meta-llama/Meta-Llama-3-70B
+              value: meta-llama/Meta-Llama-3-70B-Instruct
             - name: PORT
               value: "8080"
             # Possible values:
@@ -122,7 +122,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: 20M
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    # nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: mobilex.kr
   tls:
@@ -142,6 +141,36 @@ spec:
                   number: 80
           - path: /v1/chat
             pathType: Prefix
+            backend:
+              service:
+                name: llm
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: llm-chatgpt
+  namespace: api
+  annotations:
+    cert-manager.io/cluster-issuer: mobilex.kr
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 20M
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/rewrite-target: /v1/chat/$2
+spec:
+  ingressClassName: mobilex.kr
+  tls:
+    - hosts:
+        - api.mobilex.kr
+      secretName: api.mobilex.kr-certs
+  rules:
+    - host: api.mobilex.kr
+      http:
+        paths:
+          - path: /chat(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: llm
