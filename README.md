@@ -1,4 +1,4 @@
-# MobileX API Deployments
+# MobileX API Hub
 
 ## Usage
 
