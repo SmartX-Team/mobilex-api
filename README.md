@@ -11,7 +11,7 @@
 ### LLM
 
 ```bash
-# Create a API namespace
+# Create an API namespace
 kubectl apply -f "templates/namespace.yaml"
 
 # Create a HuggingFace Hub token
