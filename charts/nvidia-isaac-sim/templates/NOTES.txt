@@ -9,5 +9,5 @@
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "nvidia-isaac-sim.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
   echo http://$SERVICE_IP:{{ .Values.service.port }}
 {{- else if contains "ClusterIP" .Values.service.type }}
-  Connect to "{{ include "nvidia-isaac-sim.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterName }}" with NVIDIA Omniverse Client to use your application
+  Connect to "{{ include "nvidia-isaac-sim.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterName }}" with NVIDIA Omniverse Streaming Client to use your application
 {{- end }}

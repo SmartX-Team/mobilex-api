@@ -7,6 +7,14 @@
 helm repo add mobilex "https://smartx-team.github.io/mobilex-api"
 
 # Deploy a NVIDIA ISAAC-SIM instance
-helm install "my-sim" "mobilex/nvidia-isaac-sim" \
+NAME="my-sim-hoya-123"  # TODO: Change it to your unique app name
+helm install $NAME "mobilex/nvidia-isaac-sim" \
     --namespace "name-twin"
+```
+
+## Uninstall
+
+```bash
+NAME="my-sim-hoya-123"  # TODO: Change it to your app name
+helm uninstall $NAME --namespace "name-twin"
 ```
