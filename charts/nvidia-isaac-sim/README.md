@@ -4,7 +4,7 @@
 
 ```bash
 # Register the MobileX API repository
-helm repo add mobilex "https://smartx-team.github.com/mobilex-api"
+helm repo add mobilex "https://smartx-team.github.io/mobilex-api"
 
 # Deploy a NVIDIA ISAAC-SIM instance
 helm install "my-sim" "mobilex/nvidia-isaac-sim" \
