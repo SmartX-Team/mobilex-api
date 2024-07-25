@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/node-selector: dash.ulagbulag.io/is-external=true,dash.ulagbulag.io/external.user=name-twin
+  labels:
+    dash.ulagbulag.io/inject-kafka: "true"
+    dash.ulagbulag.io/inject-nats: "true"
+    pod-security.kubernetes.io/enforce: privileged
+  name: name-twin

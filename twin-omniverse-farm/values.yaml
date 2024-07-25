@@ -1,0 +1,294 @@
+---
+# Default values for ov-farm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  # -- Global image pull secrets used within the services.
+  # NOTE: Job's created by the Controller do not use the global image pull secrets.
+  # to specify secrets for those pods use "jobTemplateSpecOverrides.imagePullSecrets" setting.
+  # NOTE: should be filled with `./install.sh`
+  imagePullSecrets: []
+  # - name: global-secret
+
+  # -- Specify the services transport host. For IPv6 use "::".
+  # transportHost: 0.0.0.0
+
+  # -- Specify whether to skip database migrations. By default migrations will run during install.
+  # skip_db_migrations: false
+
+  ingress:
+    # -- Global Ingress annotations.
+    annotations:
+      cert-manager.io/cluster-issuer: farm.omniverse.mobilex.kr
+      kubernetes.io/ingress.class: mobilex.kr
+      nginx.ingress.kubernetes.io/auth-response-headers: Authorization
+      nginx.ingress.kubernetes.io/auth-url: https://mobilex.kr/oauth2/auth
+      nginx.ingress.kubernetes.io/auth-signin: https://mobilex.kr/oauth2/start?rd=https://farm.omniverse.mobilex.kr$escaped_request_uri
+    # -- Global Ingress host.
+    host: farm.omniverse.mobilex.kr
+    # -- Global Ingress paths.
+    # paths: []
+    # -- Global Ingress tls.
+    tls:
+      - hosts:
+          - farm.omniverse.mobilex.kr
+        secretName: farm.omniverse.mobilex.kr-certs
+
+agents:
+  name: agents
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+controller:
+  name: controller
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  # -- Configuration specific to this service.
+  serviceConfig:
+    capacity:
+      # -- Specify the max number of jobs the controller is allowed to run.
+      max_capacity: 32
+    k8s:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/kiss
+                    operator: In
+                    values:
+                      - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+dashboard:
+  name: dashboard
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+jobs:
+  name: jobs
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+logs:
+  name: logs
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+metrics:
+  name: metrics
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+retries:
+  name: retries
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+settings:
+  name: settings
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+tasks:
+  name: tasks
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring
+
+ui:
+  name: ui
+
+  enabled: true
+
+  # -- Number of replicas.
+  replicaCount: 1
+
+  # -- Affinity for pod assignment.
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/kiss
+                operator: In
+                values:
+                  - Compute
+
+  monitoring:
+    # -- Enables the creation of ServiceMonitor resource.
+    enabled: true
+    # -- Prometheus namespace.
+    prometheusNamespace: monitoring

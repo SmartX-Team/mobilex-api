@@ -1,0 +1,393 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-omniverse-kit
+  namespace: name-twin
+  labels:
+    app: test-omniverse-kit
+spec:
+  selector:
+    matchLabels:
+      app: test-omniverse-kit
+  template:
+    metadata:
+      labels:
+        app: test-omniverse-kit
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/kiss
+                    operator: In
+                    values:
+                      - Compute
+      imagePullSecrets:
+        - name: omniverse-farm-registry
+      terminationGracePeriodSeconds: 1
+      containers:
+        - name: kit
+          image: nvcr.io/nvidia/isaac-sim:2022.2.1
+          command:
+            - /isaac-sim/isaac-sim.headless.native.sh
+          args:
+            - --allow-root
+          env:
+            - name: OMNI_KIT_ALLOW_ROOT
+              value: "1"
+          resources:
+            limits:
+              # cpu: "1"
+              # memory: "2Gi"
+              nvidia.com/gpu: "1"
+          # FIXME: add readiness & liveness check
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8011
+            - name: tcp-47995
+              protocol: TCP
+              containerPort: 47995
+            - name: tcp-47996
+              protocol: TCP
+              containerPort: 47996
+            - name: tcp-47997
+              protocol: TCP
+              containerPort: 47997
+            - name: tcp-47998
+              protocol: TCP
+              containerPort: 47998
+            - name: tcp-47999
+              protocol: TCP
+              containerPort: 47999
+            - name: tcp-48000
+              protocol: TCP
+              containerPort: 48000
+            - name: tcp-48001
+              protocol: TCP
+              containerPort: 48001
+            - name: tcp-48002
+              protocol: TCP
+              containerPort: 48002
+            - name: tcp-48003
+              protocol: TCP
+              containerPort: 48003
+            - name: tcp-48004
+              protocol: TCP
+              containerPort: 48004
+            - name: tcp-48005
+              protocol: TCP
+              containerPort: 48005
+            - name: tcp-48006
+              protocol: TCP
+              containerPort: 48006
+            - name: tcp-48007
+              protocol: TCP
+              containerPort: 48007
+            - name: tcp-48008
+              protocol: TCP
+              containerPort: 48008
+            - name: tcp-48009
+              protocol: TCP
+              containerPort: 48009
+            - name: tcp-48010
+              protocol: TCP
+              containerPort: 48010
+            - name: tcp-48011
+              protocol: TCP
+              containerPort: 48011
+            - name: tcp-48012
+              protocol: TCP
+              containerPort: 48012
+            - name: tcp-49000
+              protocol: TCP
+              containerPort: 49000
+            - name: tcp-49001
+              protocol: TCP
+              containerPort: 49001
+            - name: tcp-49002
+              protocol: TCP
+              containerPort: 49002
+            - name: tcp-49003
+              protocol: TCP
+              containerPort: 49003
+            - name: tcp-49004
+              protocol: TCP
+              containerPort: 49004
+            - name: tcp-49005
+              protocol: TCP
+              containerPort: 49005
+            - name: tcp-49006
+              protocol: TCP
+              containerPort: 49006
+            - name: tcp-49007
+              protocol: TCP
+              containerPort: 49007
+            - name: tcp-49100
+              protocol: TCP
+              containerPort: 49100
+            - name: udp-47995
+              protocol: UDP
+              containerPort: 47995
+            - name: udp-47996
+              protocol: UDP
+              containerPort: 47996
+            - name: udp-47997
+              protocol: UDP
+              containerPort: 47997
+            - name: udp-47998
+              protocol: UDP
+              containerPort: 47998
+            - name: udp-47999
+              protocol: UDP
+              containerPort: 47999
+            - name: udp-48000
+              protocol: UDP
+              containerPort: 48000
+            - name: udp-48001
+              protocol: UDP
+              containerPort: 48001
+            - name: udp-48002
+              protocol: UDP
+              containerPort: 48002
+            - name: udp-48003
+              protocol: UDP
+              containerPort: 48003
+            - name: udp-48004
+              protocol: UDP
+              containerPort: 48004
+            - name: udp-48005
+              protocol: UDP
+              containerPort: 48005
+            - name: udp-48006
+              protocol: UDP
+              containerPort: 48006
+            - name: udp-48007
+              protocol: UDP
+              containerPort: 48007
+            - name: udp-48008
+              protocol: UDP
+              containerPort: 48008
+            - name: udp-48009
+              protocol: UDP
+              containerPort: 48009
+            - name: udp-48010
+              protocol: UDP
+              containerPort: 48010
+            - name: udp-48011
+              protocol: UDP
+              containerPort: 48011
+            - name: udp-48012
+              protocol: UDP
+              containerPort: 48012
+            - name: udp-49000
+              protocol: UDP
+              containerPort: 49000
+            - name: udp-49001
+              protocol: UDP
+              containerPort: 49001
+            - name: udp-49002
+              protocol: UDP
+              containerPort: 49002
+            - name: udp-49003
+              protocol: UDP
+              containerPort: 49003
+            - name: udp-49004
+              protocol: UDP
+              containerPort: 49004
+            - name: udp-49005
+              protocol: UDP
+              containerPort: 49005
+            - name: udp-49006
+              protocol: UDP
+              containerPort: 49006
+            - name: udp-49007
+              protocol: UDP
+              containerPort: 49007
+          volumeMounts:
+            - name: omniverse
+              mountPath: /data
+              readOnly: false
+      volumes:
+        - name: omniverse
+          persistentVolumeClaim:
+            claimName: omniverse
+            readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-omniverse-kit
+  namespace: name-twin
+  labels:
+    app: test-omniverse-kit
+spec:
+  type: ClusterIP
+  selector:
+    app: test-omniverse-kit
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8011
+      targetPort: 8011
+    - name: tcp-47995
+      protocol: TCP
+      port: 47995
+    - name: tcp-47996
+      protocol: TCP
+      port: 47996
+    - name: tcp-47997
+      protocol: TCP
+      port: 47997
+    - name: tcp-47998
+      protocol: TCP
+      port: 47998
+    - name: tcp-47999
+      protocol: TCP
+      port: 47999
+    - name: tcp-48000
+      protocol: TCP
+      port: 48000
+    - name: tcp-48001
+      protocol: TCP
+      port: 48001
+    - name: tcp-48002
+      protocol: TCP
+      port: 48002
+    - name: tcp-48003
+      protocol: TCP
+      port: 48003
+    - name: tcp-48004
+      protocol: TCP
+      port: 48004
+    - name: tcp-48005
+      protocol: TCP
+      port: 48005
+    - name: tcp-48006
+      protocol: TCP
+      port: 48006
+    - name: tcp-48007
+      protocol: TCP
+      port: 48007
+    - name: tcp-48008
+      protocol: TCP
+      port: 48008
+    - name: tcp-48009
+      protocol: TCP
+      port: 48009
+    - name: tcp-48010
+      protocol: TCP
+      port: 48010
+    - name: tcp-48011
+      protocol: TCP
+      port: 48011
+    - name: tcp-48012
+      protocol: TCP
+      port: 48012
+    - name: tcp-49000
+      protocol: TCP
+      port: 49000
+    - name: tcp-49001
+      protocol: TCP
+      port: 49001
+    - name: tcp-49002
+      protocol: TCP
+      port: 49002
+    - name: tcp-49003
+      protocol: TCP
+      port: 49003
+    - name: tcp-49004
+      protocol: TCP
+      port: 49004
+    - name: tcp-49005
+      protocol: TCP
+      port: 49005
+    - name: tcp-49006
+      protocol: TCP
+      port: 49006
+    - name: tcp-49007
+      protocol: TCP
+      port: 49007
+    - name: tcp-49100
+      protocol: TCP
+      port: 49100
+    - name: udp-47995
+      protocol: UDP
+      port: 47995
+    - name: udp-47996
+      protocol: UDP
+      port: 47996
+    - name: udp-47997
+      protocol: UDP
+      port: 47997
+    - name: udp-47998
+      protocol: UDP
+      port: 47998
+    - name: udp-47999
+      protocol: UDP
+      port: 47999
+    - name: udp-48000
+      protocol: UDP
+      port: 48000
+    - name: udp-48001
+      protocol: UDP
+      port: 48001
+    - name: udp-48002
+      protocol: UDP
+      port: 48002
+    - name: udp-48003
+      protocol: UDP
+      port: 48003
+    - name: udp-48004
+      protocol: UDP
+      port: 48004
+    - name: udp-48005
+      protocol: UDP
+      port: 48005
+    - name: udp-48006
+      protocol: UDP
+      port: 48006
+    - name: udp-48007
+      protocol: UDP
+      port: 48007
+    - name: udp-48008
+      protocol: UDP
+      port: 48008
+    - name: udp-48009
+      protocol: UDP
+      port: 48009
+    - name: udp-48010
+      protocol: UDP
+      port: 48010
+    - name: udp-48011
+      protocol: UDP
+      port: 48011
+    - name: udp-48012
+      protocol: UDP
+      port: 48012
+    - name: udp-49000
+      protocol: UDP
+      port: 49000
+    - name: udp-49001
+      protocol: UDP
+      port: 49001
+    - name: udp-49002
+      protocol: UDP
+      port: 49002
+    - name: udp-49003
+      protocol: UDP
+      port: 49003
+    - name: udp-49004
+      protocol: UDP
+      port: 49004
+    - name: udp-49005
+      protocol: UDP
+      port: 49005
+    - name: udp-49006
+      protocol: UDP
+      port: 49006
+    - name: udp-49007
+      protocol: UDP
+      port: 49007

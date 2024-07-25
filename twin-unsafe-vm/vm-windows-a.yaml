@@ -1,0 +1,192 @@
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: windows-a
+#   namespace: name-twin
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 500Gi # 스토리지 할당량
+#   storageClassName: ceph-block
+#   volumeMode: Block
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: name-twin-vm-windows-a
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Gi # 스토리지 할당량
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/vm/windows-a
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/kiss
+              operator: In
+              values:
+                - Compute
+            - key: nvidia.com/gpu.workload.config
+              operator: In
+              values:
+                - vm-passthrough
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: windows-a
+  namespace: name-twin
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi # 스토리지 할당량
+  storageClassName: manual
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows-a
+  namespace: name-twin
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/size: small
+        kubevirt.io/domain: windows-a
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/kiss
+                    operator: In
+                    values:
+                      - Compute
+                  # TODO(User): IOMMU, VFIO 활성화 후 원하는 GPU 등 자원을 isolating한다.
+                  # See: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-operator-kubevirt.html
+                  # See: https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF
+                  # See: https://forums.rockylinux.org/t/grub2-mkconfig-rl9-3-fresh-install-bug/12118/6
+                  - key: nvidia.com/gpu.workload.config
+                    operator: In
+                    values:
+                      - vm-passthrough
+      domain:
+        clock:
+          timer:
+            hpet:
+              present: false
+            hyperv: {}
+            pit:
+              tickPolicy: delay
+            rtc:
+              tickPolicy: catchup
+          utc: {}
+        # cpu:
+        #   dedicatedCpuPlacement: true
+        #   model: host-model
+        #   isolateEmulatorThread: true
+        devices:
+          autoattachGraphicsDevice: false # TODO(user): OS 설치중엔 true로 설정한다. 그렇지 않으면 VNC가 안 먹힌다.
+          disks:
+            - name: disk-a # Root Filesystem
+              bootOrder: 1
+              disk:
+                bus: virtio # NOTE: OS 설치 시 드라이버 설치 필요
+            - name: cdrom-os # OS 설치용 이미지
+              bootOrder: 2
+              # TODO(user): 설치가 필요한 드라이버: netkvm, viostor, vioscsi
+              cdrom: # FIXED
+                bus: scsi # FIXED
+            - name: cdrom-virtio # virtio 드라이버 (가상머신 H/W 드라이버) 설치용 이미지
+              cdrom:
+                bus: sata
+          gpus:
+            # Kubernetes 에서 인식된 GPU 장치명
+            - name: gpu-1
+              deviceName: nvidia.com/AD102GL_L40
+          interfaces:
+            - name: default
+              model: virtio # NOTE: OS 설치 시 드라이버 설치 필요
+              masquerade: {}
+              ports:
+                # Windows RDP 원격접속 포트
+                - name: rdp
+                  port: 3389
+                # VNC 원격접속 포트
+                - name: vnc
+                  port: 5900
+          tpm: {}
+        features:
+          acpi: {}
+          apic: {}
+          hyperv:
+            relaxed: {}
+            spinlocks:
+              spinlocks: 8191
+            vapic: {}
+          smm: {}
+        firmware:
+          bootloader:
+            efi: # UEFI 부트로더 지원
+              secureBoot: true
+        machine:
+          type: q35 # 최신 H/W 에서 잘 작동함
+        resources:
+          requests:
+            cpu: 8 # CPU 할당량
+            memory: 64Gi # RAM 할당량
+      networks:
+        - name: default
+          pod: {} # Kubernetes CNI를 준수함
+      terminationGracePeriodSeconds: 0
+      volumes:
+        # OS 설치용 이미지
+        - name: cdrom-os
+          persistentVolumeClaim:
+            # 사용가능한 OS 이미지 목록
+            # * ubuntu-22.04
+            # * ubuntu-24.04
+            # * windows-10
+            # * windows-11
+            claimName: cdrom-windows-11
+        # virtio 드라이버 (가상머신 H/W 드라이버) 설치용 이미지
+        - name: cdrom-virtio
+          containerDisk:
+            image: quay.io/kubevirt/virtio-container-disk:v1.3.0
+        # Root Filesystem (Windows: C드라이브, Linux: /, /boot, /boot/EFI 등)
+        - name: disk-a
+          persistentVolumeClaim:
+            claimName: windows-a
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: windows-a
+  namespace: name-twin
+spec:
+  type: ClusterIP
+  selector:
+    vm.kubevirt.io/name: windows-a
+  ports:
+    # Windows RDP 원격접속 포트
+    - name: rdp
+      port: 3389
+      protocol: TCP
+      targetPort: 3389
+    # VNC 원격접속 포트
+    - name: vnc
+      port: 5900
+      protocol: TCP
+      targetPort: 5900

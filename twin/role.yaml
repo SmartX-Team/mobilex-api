@@ -1,0 +1,59 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: twin-admin
+  namespace: name-twin
+rules:
+  - apiGroups:
+      - ""
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: twin-admin
+  namespace: name-twin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: twin-admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: oidc:twin
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: twin-admin
+rules:
+  - apiGroups:
+      - cassette.ulagbulag.io
+      - dash.ulagbulag.io
+      - kiss.ulagbulag.io
+      - kubegraph.ulagbulag.io
+      - vine.ulagbulag.io
+    resources:
+      - "*"
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: oidc:twin:twin-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: twin-admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: oidc:twin
