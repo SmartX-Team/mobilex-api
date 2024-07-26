@@ -3,6 +3,16 @@ entries:
   nvidia-isaac-sim:
   - apiVersion: v2
     appVersion: 2022.2.1
+    created: "2024-07-26T08:33:53.506200978Z"
+    description: Convenient NVIDIA headless ISAAC-SIM deployment tool
+    digest: bd3b6573b1c0acf94433632e2fc6c915ffa1eea68e67eca2254cf4633de80dc2
+    name: nvidia-isaac-sim
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.3/nvidia-isaac-sim-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 2022.2.1
     created: "2024-07-25T14:18:01.535303264Z"
     description: Convenient NVIDIA headless ISAAC-SIM deployment tool
     digest: 42f5dca7c60879be114d366770e4a8d7d47b6dccae90e1211d4584edd81bbc3f
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.1/nvidia-isaac-sim-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-25T14:18:01.535312631Z"
+generated: "2024-07-26T08:33:53.506278603Z"
