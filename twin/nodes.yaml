@@ -12,9 +12,9 @@ spec:
     - effect: PreferNoSchedule
       key: dash.ulagbulag.io/is-external
       value: "true"
-    - effect: PreferNoSchedule
-      key: dash.ulagbulag.io/external.user
-      value: name-twin
+    # - effect: PreferNoSchedule
+    #   key: dash.ulagbulag.io/external.user
+    #   value: name-twin
 ---
 apiVersion: v1
 kind: Node
@@ -30,6 +30,6 @@ spec:
     - effect: PreferNoSchedule
       key: dash.ulagbulag.io/is-external
       value: "true"
-    - effect: PreferNoSchedule
-      key: dash.ulagbulag.io/external.user
-      value: name-twin
+    # - effect: PreferNoSchedule
+    #   key: dash.ulagbulag.io/external.user
+    #   value: name-twin
