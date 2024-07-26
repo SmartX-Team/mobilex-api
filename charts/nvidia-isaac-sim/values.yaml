@@ -22,17 +22,16 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext:
-  {}
-  # fsGroup: 2000
+  fsGroup: 0
 
 securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: false
+  runAsUser: 0
 
 service:
   type: ClusterIP
@@ -49,5 +48,14 @@ resources:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+cache:
+  resources:
+    requests:
+      storage: 100Gi
+
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ceph-block
 
 terminationGracePeriodSeconds: 1

@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "nvidia-isaac-sim.fullname" . }}
+  labels:
+    {{- include "nvidia-isaac-sim.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.cache.accessModes | nindent 4 }}
+  resources:
+    {{- toYaml .Values.cache.resources | nindent 4 }}
+  storageClassName: {{ .Values.cache.storageClassName }}
+  volumeMode: Filesystem

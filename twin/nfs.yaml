@@ -1,0 +1,73 @@
+---
+apiVersion: ceph.rook.io/v1
+kind: CephNFS
+metadata:
+  name: csi-rook-ceph-twin
+  namespace: csi-rook-ceph
+spec:
+  # Settings for the NFS server
+  server:
+    active: 1
+    logLevel: NIV_INFO
+    placement:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+                - key: node-role.kubernetes.io/kiss
+                  operator: In
+                  values:
+                    - Storage
+            weight: 1
+          - preference:
+              matchExpressions:
+                - key: node-role.kubernetes.io/kiss
+                  operator: In
+                  values:
+                    - Gateway
+            weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: node-role.kubernetes.io/kiss
+                  operator: In
+                  values:
+                    - Compute
+                    - Gateway
+                    - Storage
+    resources:
+      limits:
+        memory: "8Gi"
+      requests:
+        cpu: "3"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-name-twin-omniverse
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 10Ti
+  nfs:
+    path: /omniverse
+    server: rook-ceph-nfs-csi-rook-ceph-twin-a.csi-rook-ceph.svc.ops.openark
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: omniverse
+  namespace: name-twin
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Ti
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: pvc-name-twin-omniverse

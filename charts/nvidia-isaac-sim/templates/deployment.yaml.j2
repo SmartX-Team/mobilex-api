@@ -212,13 +212,35 @@ spec:
             - name: udp-49007
               protocol: UDP
               containerPort: 49007
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: omniverse
               mountPath: /data
               readOnly: false
+            - name: cache
+              mountPath: /root/.cache
+              subPath: .cache
+              readOnly: false
+            - name: cache
+              mountPath: /root/.local
+              subPath: .local
+              readOnly: false
+            - name: cache
+              mountPath: /root/.nv
+              subPath: .nv
+              readOnly: false
+            - name: cache
+              mountPath: /root/.nvidia-omniverse
+              subPath: .nvidia-omniverse
+              readOnly: false
       volumes:
+        - name: cache
+          persistentVolumeClaim:
+            claimName: {{ include "nvidia-isaac-sim.fullname" . }}
+            readOnly: false
         - name: omniverse
           persistentVolumeClaim:
             claimName: omniverse
