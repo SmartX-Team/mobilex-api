@@ -18,3 +18,13 @@ helm install $NAME "mobilex/nvidia-isaac-sim" \
 NAME="my-sim-hoya-123"  # TODO: Change it to your app name
 helm uninstall $NAME --namespace "name-twin"
 ```
+
+## Validating
+
+```bash
+# Install json schema generator
+helm plugin install "https://github.com/losisin/helm-values-schema-json.git"
+
+# Create a json schema
+helm schema
+```

@@ -1,0 +1,13 @@
+---
+input:
+  - values.yaml
+
+draft: 2020
+indent: 2
+output: values.schema.json
+
+schemaRoot:
+  id: https://smartx-team.github.io/mobilex-api/charts/nvidia-isaac-sim
+  title: NVIDIA Issac-Sim Schema
+  description: Schema for NVIDIA Issac-Sim Helm Chart
+  additionalProperties: true
