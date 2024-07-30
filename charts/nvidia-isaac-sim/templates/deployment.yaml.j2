@@ -23,21 +23,17 @@ spec:
         {{- end }}
     spec:
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/kiss
-                    operator: In
-                    values:
-                      - Compute
+        {{- toYaml .Values.affinity | nindent 8 }}
       {{- with .Values.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      priorityClassName: {{ .Values.priorityClass }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      terminationGracePeriodSeconds: {{ .Values.image.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 
       containers:
         - name: kit
@@ -217,27 +213,14 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            - name: local
+              mountPath: /root
+              readOnly: false
             - name: omniverse
-              mountPath: /data
-              readOnly: false
-            - name: cache
-              mountPath: /root/.cache
-              subPath: .cache
-              readOnly: false
-            - name: cache
-              mountPath: /root/.local
-              subPath: .local
-              readOnly: false
-            - name: cache
-              mountPath: /root/.nv
-              subPath: .nv
-              readOnly: false
-            - name: cache
-              mountPath: /root/.nvidia-omniverse
-              subPath: .nvidia-omniverse
+              mountPath: /root/data
               readOnly: false
       volumes:
-        - name: cache
+        - name: local
           persistentVolumeClaim:
             claimName: {{ include "nvidia-isaac-sim.fullname" . }}
             readOnly: false

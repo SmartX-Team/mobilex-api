@@ -24,7 +24,6 @@ metadata:
     dash.ulagbulag.io/alias: autox-l40-2
     dash.ulagbulag.io/is-external: "true"
     dash.ulagbulag.io/external.user: name-twin
-    nvidia.com/gpu.workload.config: vm-passthrough
 spec:
   taints:
     - effect: PreferNoSchedule

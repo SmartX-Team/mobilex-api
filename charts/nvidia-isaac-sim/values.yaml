@@ -18,8 +18,20 @@ clusterName: ops.openark
 nameOverride: ""
 fullnameOverride: ""
 
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/kiss
+              operator: In
+              values:
+                - Compute
+
+nodeSelector: {}
 podAnnotations: {}
 podLabels: {}
+priorityClassName: k8s-cluster-critical
 
 podSecurityContext:
   fsGroup: 0
@@ -42,8 +54,8 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: "11"
-    memory: 46Gi
+    # cpu: "11"
+    # memory: 46Gi
     nvidia.com/gpu: "1"
   # requests:
   #   cpu: 100m
