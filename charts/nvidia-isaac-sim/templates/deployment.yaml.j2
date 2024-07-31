@@ -219,6 +219,9 @@ spec:
             - name: omniverse
               mountPath: /root/data
               readOnly: false
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
       volumes:
         - name: local
           persistentVolumeClaim:
@@ -228,3 +231,5 @@ spec:
           persistentVolumeClaim:
             claimName: omniverse
             readOnly: false
+        - name: tmp
+          emptyDir: {}
