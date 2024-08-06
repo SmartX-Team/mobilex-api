@@ -24,6 +24,7 @@ spec:
     spec:
       affinity:
         {{- toYaml .Values.affinity | nindent 8 }}
+      enableServiceLinks: false
       {{- with .Values.image.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
