@@ -3,6 +3,16 @@ entries:
   mobilex-ssh:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-08-06T11:06:51.048589475Z"
+    description: Convenient SSH development session deployment tool
+    digest: d6c2e3e58de8969b55b3a13ec299a850148f3cbd5901a19a709a0bab97ca9ca8
+    name: mobilex-ssh
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.1/mobilex-ssh-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-08-06T10:32:26.465387583Z"
     description: Convenient SSH development session deployment tool
     digest: 5fa7c1b1693d0282a329f76dd9e2fc864a257826f7323ddc22769d01d9bbf753
@@ -12,6 +22,16 @@ entries:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.0/mobilex-ssh-0.1.0.tgz
     version: 0.1.0
   nvidia-isaac-sim:
+  - apiVersion: v2
+    appVersion: 2022.2.1
+    created: "2024-08-06T11:06:51.202236009Z"
+    description: Convenient NVIDIA headless ISAAC-SIM deployment tool
+    digest: 12c868823276194f176ba88ec8a5c306d347a3fb72614fd3251f687528c1eb58
+    name: nvidia-isaac-sim
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.6/nvidia-isaac-sim-0.1.6.tgz
+    version: 0.1.6
   - apiVersion: v2
     appVersion: 2022.2.1
     created: "2024-08-06T10:32:26.577943696Z"
@@ -52,4 +72,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.1/nvidia-isaac-sim-0.1.1.tgz
     version: 0.1.1
-generated: "2024-08-06T10:32:26.577963844Z"
+generated: "2024-08-06T11:06:51.202268449Z"
