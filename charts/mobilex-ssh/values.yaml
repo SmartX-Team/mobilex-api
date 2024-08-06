@@ -27,6 +27,7 @@ affinity:
             - key: nvidia.com/gpu.product
               operator: In
               values:
+                - NVIDIA-H100-PCIe
                 - NVIDIA-L40
 
 env:
