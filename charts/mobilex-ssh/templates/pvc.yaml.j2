@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mobilex-ssh.fullname" . }}
+  labels:
+    {{- include "mobilex-ssh.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.storage.home.accessModes | nindent 4 }}
+  resources:
+    {{- toYaml .Values.storage.home.resources | nindent 4 }}
+  storageClassName: {{ .Values.storage.home.storageClassName }}
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ include "mobilex-ssh.fullname" . }}-host-ssh"
+  labels:
+    {{- include "mobilex-ssh.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.storage.hostKey.accessModes | nindent 4 }}
+  resources:
+    {{- toYaml .Values.storage.hostKey.resources | nindent 4 }}
+  storageClassName: {{ .Values.storage.hostKey.storageClassName }}
+  volumeMode: Filesystem

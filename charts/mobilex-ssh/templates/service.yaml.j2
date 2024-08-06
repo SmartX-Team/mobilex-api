@@ -1,0 +1,179 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mobilex-ssh.fullname" . }}
+  labels:
+    {{- include "mobilex-ssh.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "mobilex-ssh.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: 22
+    - name: http
+      protocol: TCP
+      port: 8011
+      targetPort: 8011
+    - name: tcp-47995
+      protocol: TCP
+      port: 47995
+    - name: tcp-47996
+      protocol: TCP
+      port: 47996
+    - name: tcp-47997
+      protocol: TCP
+      port: 47997
+    - name: tcp-47998
+      protocol: TCP
+      port: 47998
+    - name: tcp-47999
+      protocol: TCP
+      port: 47999
+    - name: tcp-48000
+      protocol: TCP
+      port: 48000
+    - name: tcp-48001
+      protocol: TCP
+      port: 48001
+    - name: tcp-48002
+      protocol: TCP
+      port: 48002
+    - name: tcp-48003
+      protocol: TCP
+      port: 48003
+    - name: tcp-48004
+      protocol: TCP
+      port: 48004
+    - name: tcp-48005
+      protocol: TCP
+      port: 48005
+    - name: tcp-48006
+      protocol: TCP
+      port: 48006
+    - name: tcp-48007
+      protocol: TCP
+      port: 48007
+    - name: tcp-48008
+      protocol: TCP
+      port: 48008
+    - name: tcp-48009
+      protocol: TCP
+      port: 48009
+    - name: tcp-48010
+      protocol: TCP
+      port: 48010
+    - name: tcp-48011
+      protocol: TCP
+      port: 48011
+    - name: tcp-48012
+      protocol: TCP
+      port: 48012
+    - name: tcp-49000
+      protocol: TCP
+      port: 49000
+    - name: tcp-49001
+      protocol: TCP
+      port: 49001
+    - name: tcp-49002
+      protocol: TCP
+      port: 49002
+    - name: tcp-49003
+      protocol: TCP
+      port: 49003
+    - name: tcp-49004
+      protocol: TCP
+      port: 49004
+    - name: tcp-49005
+      protocol: TCP
+      port: 49005
+    - name: tcp-49006
+      protocol: TCP
+      port: 49006
+    - name: tcp-49007
+      protocol: TCP
+      port: 49007
+    - name: tcp-49100
+      protocol: TCP
+      port: 49100
+    - name: udp-47995
+      protocol: UDP
+      port: 47995
+    - name: udp-47996
+      protocol: UDP
+      port: 47996
+    - name: udp-47997
+      protocol: UDP
+      port: 47997
+    - name: udp-47998
+      protocol: UDP
+      port: 47998
+    - name: udp-47999
+      protocol: UDP
+      port: 47999
+    - name: udp-48000
+      protocol: UDP
+      port: 48000
+    - name: udp-48001
+      protocol: UDP
+      port: 48001
+    - name: udp-48002
+      protocol: UDP
+      port: 48002
+    - name: udp-48003
+      protocol: UDP
+      port: 48003
+    - name: udp-48004
+      protocol: UDP
+      port: 48004
+    - name: udp-48005
+      protocol: UDP
+      port: 48005
+    - name: udp-48006
+      protocol: UDP
+      port: 48006
+    - name: udp-48007
+      protocol: UDP
+      port: 48007
+    - name: udp-48008
+      protocol: UDP
+      port: 48008
+    - name: udp-48009
+      protocol: UDP
+      port: 48009
+    - name: udp-48010
+      protocol: UDP
+      port: 48010
+    - name: udp-48011
+      protocol: UDP
+      port: 48011
+    - name: udp-48012
+      protocol: UDP
+      port: 48012
+    - name: udp-49000
+      protocol: UDP
+      port: 49000
+    - name: udp-49001
+      protocol: UDP
+      port: 49001
+    - name: udp-49002
+      protocol: UDP
+      port: 49002
+    - name: udp-49003
+      protocol: UDP
+      port: 49003
+    - name: udp-49004
+      protocol: UDP
+      port: 49004
+    - name: udp-49005
+      protocol: UDP
+      port: 49005
+    - name: udp-49006
+      protocol: UDP
+      port: 49006
+    - name: udp-49007
+      protocol: UDP
+      port: 49007
