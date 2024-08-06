@@ -30,7 +30,7 @@ spec:
       {{- end }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
-      priorityClassName: {{ .Values.priorityClass }}
+      priorityClassName: {{ .Values.priorityClassName }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       serviceAccount: {{ include "mobilex-ssh.serviceAccountName" . }}
