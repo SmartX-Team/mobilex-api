@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llm-a10
+  name: llm
   namespace: api
   labels:
     app: llm
     base: huggingface-hub
-    gpu: nvidia-a10
+    gpu: nvidia-a100
     model: llama-3-70b
 spec:
   selector:
     matchLabels:
       app: llm
       base: huggingface-hub
-      gpu: nvidia-a10
+      gpu: nvidia-a100
       model: llama-3-70b
   template:
     metadata:
@@ -23,7 +23,7 @@ spec:
       labels:
         app: llm
         base: huggingface-hub
-        gpu: nvidia-a10
+        gpu: nvidia-a100
         model: llama-3-70b
     spec:
       affinity:
@@ -34,10 +34,10 @@ spec:
                   - key: nvidia.com/gpu.product
                     operator: In
                     values:
-                      - NVIDIA-A10
+                      - NVIDIA-A100-SXM4-40GB
       containers:
         - name: tgi
-          image: ghcr.io/huggingface/text-generation-inference:sha-1d1b1ef # 2.1.2-pre-2024-07-17
+          image: ghcr.io/huggingface/text-generation-inference:2.2.0
           imagePullPolicy: Always
           args:
             - --otlp-endpoint
@@ -53,11 +53,11 @@ spec:
             # - name: DTYPE
             #   value: float16
             - name: MAX_TOTAL_TOKENS
-              value: "8192"
+              value: "131072"
             - name: MODEL_ID
               # value: yanolja/EEVE-Korean-Instruct-10.8B-v1.0
               # value: beomi/Llama-3-Open-Ko-8B-Instruct-preview
-              value: meta-llama/Meta-Llama-3-70B-Instruct
+              value: meta-llama/Meta-Llama-3.1-70B-Instruct
             - name: PORT
               value: "8080"
             # Possible values:
