@@ -72,4 +72,15 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.1/nvidia-isaac-sim-0.1.1.tgz
     version: 0.1.1
-generated: "2024-08-06T11:06:51.202268449Z"
+  oidc-login:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-08-28T10:18:08.140851248Z"
+    description: Convenient OIDC authorization tool per user
+    digest: 0a13b2ad75f505d87e32c541d696f90ccdbead6c05a3a95cc24ea8c7778e3041
+    name: oidc-login
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.0/oidc-login-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-08-28T10:18:08.14087392Z"
