@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llm
+  name: llm-a10
   namespace: api
   labels:
     app: llm
     base: huggingface-hub
-    gpu: nvidia-a100
+    gpu: nvidia-a10
     model: llama-3-70b
 spec:
   selector:
     matchLabels:
       app: llm
       base: huggingface-hub
-      gpu: nvidia-a100
+      gpu: nvidia-a10
       model: llama-3-70b
   strategy:
     type: Recreate # we have to reuse the gpus, not double-allocating
@@ -25,7 +25,7 @@ spec:
       labels:
         app: llm
         base: huggingface-hub
-        gpu: nvidia-a100
+        gpu: nvidia-a10
         model: llama-3-70b
     spec:
       affinity:
@@ -36,7 +36,7 @@ spec:
                   - key: nvidia.com/gpu.product
                     operator: In
                     values:
-                      - NVIDIA-A100-SXM4-40GB
+                      - NVIDIA-A10
       containers:
         - name: tgi
           image: ghcr.io/huggingface/text-generation-inference:2.3.0
