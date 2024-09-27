@@ -54,6 +54,10 @@ spec:
             #   value: "0"
             # - name: DTYPE
             #   value: float16
+            - name: HF_HOME
+              value: /data
+            - name: HF_TOKEN_PATH
+              value: /root/.cache/huggingface/token
             - name: MAX_TOTAL_TOKENS
               # value: "131072"
               value: "4096"
