@@ -6,7 +6,7 @@
 # Register the MobileX API repository
 helm repo add mobilex "https://smartx-team.github.io/mobilex-api"
 
-# Deploy a NVIDIA ISAAC-SIM instance
+# Deploy a MobileX SSH instance
 NAME="my-ssh-hoya-123"  # TODO: Change it to your unique app name
 helm install $NAME "mobilex/mobilex-ssh" \
     --namespace "name-twin"
