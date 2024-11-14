@@ -1,0 +1,123 @@
+---
+# Default values for nvidia-isaac-sim.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.io/ulagbulag/openark
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+clusterName: ops.openark
+nameOverride: ""
+fullnameOverride: ""
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/kiss
+              operator: In
+              values:
+                - Compute
+            - key: nvidia.com/gpu.product
+              operator: In
+              values:
+                - NVIDIA-H100-PCIe
+                - NVIDIA-L40
+
+env:
+  - name: DOCKER_ROOTLESS
+    value: "false"
+
+nodeSelector: {}
+podAnnotations: {}
+podLabels: {}
+priorityClassName: k8s-cluster-critical
+
+podSecurityContext:
+  fsGroup: 2000
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities:
+    add:
+      - apparmor:unconfined
+      - seccomp:unconfined
+      - MKNOD
+      - SETFCAP
+      - SETGID
+      - SETUID
+      - SYS_ADMIN
+      - SYS_CHROOT
+
+service:
+  type: ClusterIP
+  port: 22
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+  password: "myPassword!"
+  shell: zsh
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: "11"
+    memory: 32Gi
+    nvidia.com/gpu: "1"
+    squat.ai/fuse: "1"
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+storage:
+  home:
+    resources:
+      requests:
+        storage: 1Ti
+
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: ceph-block
+
+  hostKey:
+    resources:
+      requests:
+        storage: 16Mi
+
+    accessModes:
+      - ReadWriteMany
+    storageClassName: ceph-filesystem
+
+terminationGracePeriodSeconds: 5
+
+extraVolumes:
+  - name: omniverse
+    persistentVolumeClaim:
+      claimName: omniverse
+      readOnly: false
+
+extraVolumeMounts:
+  - name: omniverse
+    mountPath: /home/user/Public
+    readOnly: false

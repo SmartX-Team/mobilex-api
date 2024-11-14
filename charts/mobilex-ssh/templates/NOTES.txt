@@ -1,0 +1,21 @@
+1. Access SSH to the container by running these commands:
+{{- if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "mobilex-ssh.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  ssh "user@$NODE_IP" -p $NODE_PORT
+{{- else if contains "LoadBalancer" .Values.service.type }}
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "mobilex-ssh.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "mobilex-ssh.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+{{- if eq (int .Values.service.port) 22 }}
+  ssh "user@$SERVICE_IP"
+{{- else }}
+  ssh "user@$SERVICE_IP" -p {{ .Values.service.port }}
+{{- end }}
+{{- else if contains "ClusterIP" .Values.service.type }}
+{{- if eq (int .Values.service.port) 22 }}
+  ssh "user@{{ include "mobilex-ssh.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterName }}"
+{{- else }}
+  ssh "user@{{ include "mobilex-ssh.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterName }}" -p {{ .Values.service.port }}
+{{- end }}
+{{- end }}

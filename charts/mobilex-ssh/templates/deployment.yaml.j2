@@ -1,0 +1,258 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mobilex-ssh.fullname" . }}
+  labels:
+    {{- include "mobilex-ssh.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mobilex-ssh.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mobilex-ssh.labels" . | nindent 8 }}
+	{{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      enableServiceLinks: false
+      {{- with .Values.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      serviceAccount: {{ include "mobilex-ssh.serviceAccountName" . }}
+      shareProcessNamespace: true
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+
+      containers:
+        - name: session
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: USER_PASSWORD
+              value: {{ .Values.serviceAccount.password }}
+            - name: USER_SHELL
+              value: "/bin/{{ .Values.serviceAccount.shell }}"
+            {{- with .Values.env }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: ssh
+              protocol: TCP
+              containerPort: 22
+            - name: http
+              protocol: TCP
+              containerPort: 8011
+            - name: tcp-47995
+              protocol: TCP
+              containerPort: 47995
+            - name: tcp-47996
+              protocol: TCP
+              containerPort: 47996
+            - name: tcp-47997
+              protocol: TCP
+              containerPort: 47997
+            - name: tcp-47998
+              protocol: TCP
+              containerPort: 47998
+            - name: tcp-47999
+              protocol: TCP
+              containerPort: 47999
+            - name: tcp-48000
+              protocol: TCP
+              containerPort: 48000
+            - name: tcp-48001
+              protocol: TCP
+              containerPort: 48001
+            - name: tcp-48002
+              protocol: TCP
+              containerPort: 48002
+            - name: tcp-48003
+              protocol: TCP
+              containerPort: 48003
+            - name: tcp-48004
+              protocol: TCP
+              containerPort: 48004
+            - name: tcp-48005
+              protocol: TCP
+              containerPort: 48005
+            - name: tcp-48006
+              protocol: TCP
+              containerPort: 48006
+            - name: tcp-48007
+              protocol: TCP
+              containerPort: 48007
+            - name: tcp-48008
+              protocol: TCP
+              containerPort: 48008
+            - name: tcp-48009
+              protocol: TCP
+              containerPort: 48009
+            - name: tcp-48010
+              protocol: TCP
+              containerPort: 48010
+            - name: tcp-48011
+              protocol: TCP
+              containerPort: 48011
+            - name: tcp-48012
+              protocol: TCP
+              containerPort: 48012
+            - name: tcp-49000
+              protocol: TCP
+              containerPort: 49000
+            - name: tcp-49001
+              protocol: TCP
+              containerPort: 49001
+            - name: tcp-49002
+              protocol: TCP
+              containerPort: 49002
+            - name: tcp-49003
+              protocol: TCP
+              containerPort: 49003
+            - name: tcp-49004
+              protocol: TCP
+              containerPort: 49004
+            - name: tcp-49005
+              protocol: TCP
+              containerPort: 49005
+            - name: tcp-49006
+              protocol: TCP
+              containerPort: 49006
+            - name: tcp-49007
+              protocol: TCP
+              containerPort: 49007
+            - name: tcp-49100
+              protocol: TCP
+              containerPort: 49100
+            - name: udp-47995
+              protocol: UDP
+              containerPort: 47995
+            - name: udp-47996
+              protocol: UDP
+              containerPort: 47996
+            - name: udp-47997
+              protocol: UDP
+              containerPort: 47997
+            - name: udp-47998
+              protocol: UDP
+              containerPort: 47998
+            - name: udp-47999
+              protocol: UDP
+              containerPort: 47999
+            - name: udp-48000
+              protocol: UDP
+              containerPort: 48000
+            - name: udp-48001
+              protocol: UDP
+              containerPort: 48001
+            - name: udp-48002
+              protocol: UDP
+              containerPort: 48002
+            - name: udp-48003
+              protocol: UDP
+              containerPort: 48003
+            - name: udp-48004
+              protocol: UDP
+              containerPort: 48004
+            - name: udp-48005
+              protocol: UDP
+              containerPort: 48005
+            - name: udp-48006
+              protocol: UDP
+              containerPort: 48006
+            - name: udp-48007
+              protocol: UDP
+              containerPort: 48007
+            - name: udp-48008
+              protocol: UDP
+              containerPort: 48008
+            - name: udp-48009
+              protocol: UDP
+              containerPort: 48009
+            - name: udp-48010
+              protocol: UDP
+              containerPort: 48010
+            - name: udp-48011
+              protocol: UDP
+              containerPort: 48011
+            - name: udp-48012
+              protocol: UDP
+              containerPort: 48012
+            - name: udp-49000
+              protocol: UDP
+              containerPort: 49000
+            - name: udp-49001
+              protocol: UDP
+              containerPort: 49001
+            - name: udp-49002
+              protocol: UDP
+              containerPort: 49002
+            - name: udp-49003
+              protocol: UDP
+              containerPort: 49003
+            - name: udp-49004
+              protocol: UDP
+              containerPort: 49004
+            - name: udp-49005
+              protocol: UDP
+              containerPort: 49005
+            - name: udp-49006
+              protocol: UDP
+              containerPort: 49006
+            - name: udp-49007
+              protocol: UDP
+              containerPort: 49007
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+              readOnly: true
+            - name: home
+              mountPath: /home/user
+              readOnly: false
+            - name: host-ssh
+              mountPath: /etc/ssh
+              readOnly: false
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
+            {{- with .Values.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+      volumes:
+        - name: cgroup
+          hostPath:
+            path: /sys/fs/cgroup
+            type: Directory
+        - name: home
+          persistentVolumeClaim:
+            claimName: {{ include "mobilex-ssh.fullname" . }}
+            readOnly: false
+        - name: host-ssh
+          persistentVolumeClaim:
+            claimName: "{{ include "mobilex-ssh.fullname" . }}-host-ssh"
+            readOnly: false
+        - name: tmp
+          emptyDir: {}
+        {{- with .Values.extraVolumes }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}

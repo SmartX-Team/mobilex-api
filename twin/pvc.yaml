@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-93ef7f50-2dd2-4968-9f8a-7a3af4b696d9-name-omni
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 10Ti
+  csi:
+    driver: csi-rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-user
+      namespace: csi-rook-ceph
+    volumeAttributes:
+      clusterID: csi-rook-ceph
+      fsName: ceph-filesystem
+      pool: ceph-filesystem-data0
+      rootPath: /volumes/csi/csi-vol-271ee28f-d80f-4a2d-b626-835227ecec36/573a0512-b064-4098-9f42-505e1d211149/omniverse
+      staticVolume: "true"
+      storage.kubernetes.io/csiProvisionerIdentity: 1685305850817-8081-csi-rook-ceph.cephfs.csi.ceph.com
+      subvolumeName: csi-vol-271ee28f-d80f-4a2d-b626-835227ecec36
+      subvolumePath: /volumes/csi/csi-vol-271ee28f-d80f-4a2d-b626-835227ecec36/573a0512-b064-4098-9f42-505e1d211149
+    volumeHandle: 0001-000d-csi-rook-ceph-0000000000000001-271ee28f-d80f-4a2d-b626-835227ecec36-name-omni
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ceph-filesystem
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: omniverse
+  namespace: name-twin
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Ti
+  storageClassName: ceph-filesystem
+  volumeMode: Filesystem
+  volumeName: pvc-93ef7f50-2dd2-4968-9f8a-7a3af4b696d9-name-omni

@@ -1,0 +1,73 @@
+---
+# Default values for nvidia-isaac-sim.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nvcr.io/nvidia/isaac-sim
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+  imagePullSecrets:
+    - name: omniverse-registry
+
+clusterName: ops.openark
+nameOverride: ""
+fullnameOverride: ""
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/kiss
+              operator: In
+              values:
+                - Compute
+
+nodeSelector: {}
+podAnnotations: {}
+podLabels: {}
+priorityClassName: k8s-cluster-critical
+
+podSecurityContext:
+  fsGroup: 0
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+  runAsUser: 0
+
+service:
+  type: ClusterIP
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    # cpu: "11"
+    # memory: 46Gi
+    nvidia.com/gpu: "1"
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+cache:
+  resources:
+    requests:
+      storage: 100Gi
+
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ceph-block
+
+terminationGracePeriodSeconds: 1

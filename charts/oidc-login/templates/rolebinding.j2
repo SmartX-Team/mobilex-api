@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "oidc-login.fullname" . }}
+  labels:
+    {{- include "oidc-login.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "{{ .Values.account.roleName }}"
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: "oidc:{{ include "oidc-login.userName" . }}"

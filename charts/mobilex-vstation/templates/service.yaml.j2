@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mobilex-vstation.fullname" . }}
+  labels:
+    ark.ulagbulag.io/is-external: "true"
+    {{- include "mobilex-vstation.labels" . | nindent 4 }}
+spec:
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "mobilex-vstation.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: {{ .Values.service.ports.ssh }}
+      targetPort: 22
+    - name: rdp-tcp
+      protocol: TCP
+      port: 3389
+    - name: rdp-udp
+      protocol: UDP
+      port: 3389
+    - name: vnc
+      protocol: TCP
+      port: {{ .Values.service.ports.vnc }}
+      targetPort: 5900

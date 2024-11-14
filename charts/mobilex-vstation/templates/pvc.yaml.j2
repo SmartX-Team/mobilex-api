@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "mobilex-vstation.fullname" . }}
+  labels:
+    local: "false"
+    shared: "false"
+    {{- include "mobilex-vstation.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.storage.home.accessModes | nindent 4 }}
+  resources:
+    {{- toYaml .Values.storage.home.resources | nindent 4 }}
+  storageClassName: {{ .Values.storage.home.storageClassName }}
+  volumeMode: Filesystem
