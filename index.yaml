@@ -11,4 +11,37 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.1/mobilex-ssh-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-14T12:19:38.097607625Z"
+  mobilex-vstation:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-14T12:21:11.450855437Z"
+    description: Convenient MobileX Station VDI deployment tool
+    digest: 45a10987e3741cb4d356e39c0f862b41a92c0b3e7c2fc89ff8de38f9caccbaa7
+    name: mobilex-vstation
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-vstation-0.1.1/mobilex-vstation-0.1.1.tgz
+    version: 0.1.1
+  nvidia-isaac-sim:
+  - apiVersion: v2
+    appVersion: 2022.2.1
+    created: "2024-11-14T12:21:11.569498961Z"
+    description: Convenient NVIDIA headless ISAAC-SIM deployment tool
+    digest: 1f6e4ad661ab206b525f8b5158b1c2d478f275a239f784f454f547a61bb73b45
+    name: nvidia-isaac-sim
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.7/nvidia-isaac-sim-0.1.7.tgz
+    version: 0.1.7
+  oidc-login:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-11-14T12:21:11.676486667Z"
+    description: Convenient OIDC authorization tool per user
+    digest: 66a93a2282943fac3f1339e133cba7086c9ff4b31e7665e2ebb150d2133ce265
+    name: oidc-login
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-11-14T12:21:11.676496946Z"
