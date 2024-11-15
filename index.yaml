@@ -1,6 +1,49 @@
 apiVersion: v1
 entries:
+  cdl-dataset:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-15T10:14:12.010394259Z"
+    description: Convenient Connected Data Lake Dataset instance deployment tool
+    digest: 9eea5c7fc111f7ab9cc9db46c06b6f269f632476ff2006131478c2029bde0972
+    name: cdl-dataset
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/cdl-dataset-0.1.1/cdl-dataset-0.1.1.tgz
+    version: 0.1.1
+  cdl-endpoint:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-15T10:14:12.149164828Z"
+    description: Convenient Connected Data Lake endpoint instance deployment tool
+    digest: f672c00865bf3838b6292c2c021c7c3a968d9cf19ba20a4085fc4d2196721189
+    name: cdl-endpoint
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/cdl-endpoint-0.1.3/cdl-endpoint-0.1.3.tgz
+    version: 0.1.3
+  data-pond:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-15T10:14:12.275523686Z"
+    description: Convenient Data Pond instance deployment tool
+    digest: bd58b58ee492a745c0799837b271ca9fa9862bad613faad72219b5a7950ceaa0
+    name: data-pond
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/data-pond-0.1.1/data-pond-0.1.1.tgz
+    version: 0.1.1
   mobilex-ssh:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-15T10:14:12.413299948Z"
+    description: Convenient SSH development session deployment tool
+    digest: 61b86aef4f12d95d3f78a6bfeec923a1e31385f31067c741d5dbc797ba38065c
+    name: mobilex-ssh
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.3/mobilex-ssh-0.1.3.tgz
+    version: 0.1.3
   - apiVersion: v2
     appVersion: latest-devel
     created: "2024-11-15T04:47:58.37835239Z"
@@ -24,6 +67,16 @@ entries:
   mobilex-vstation:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-15T10:14:12.530868159Z"
+    description: Convenient MobileX Station VDI deployment tool
+    digest: d8dcbb0af48c82abf90940bec55562bb09f65aa2d60bb30b103427c7b5eba03a
+    name: mobilex-vstation
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-vstation-0.1.3/mobilex-vstation-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-15T04:47:58.483876009Z"
     description: Convenient MobileX Station VDI deployment tool
     digest: 9fa80f9fb87938ff491ebda986331bb3c8da1a73c7ffc86155a2a3c777a594e6
@@ -45,6 +98,16 @@ entries:
   nvidia-isaac-sim:
   - apiVersion: v2
     appVersion: 2022.2.1
+    created: "2024-11-15T10:14:12.627860839Z"
+    description: Convenient NVIDIA headless ISAAC-SIM deployment tool
+    digest: cceca74cf1c03b7385c6395a90cdcd6a6a1d8a62003ac53812aa40e687c5124c
+    name: nvidia-isaac-sim
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/nvidia-isaac-sim-0.1.8/nvidia-isaac-sim-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 2022.2.1
     created: "2024-11-14T12:21:11.569498961Z"
     description: Convenient NVIDIA headless ISAAC-SIM deployment tool
     digest: 1f6e4ad661ab206b525f8b5158b1c2d478f275a239f784f454f547a61bb73b45
@@ -56,6 +119,16 @@ entries:
   oidc-login:
   - apiVersion: v2
     appVersion: latest
+    created: "2024-11-15T10:14:12.775664313Z"
+    description: Convenient OIDC authorization tool per user
+    digest: 8f51a8a030b465113afcbd002458dc8dadad441d193866214c8f27e6055ce1b9
+    name: oidc-login
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.2/oidc-login-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-11-14T12:21:11.676486667Z"
     description: Convenient OIDC authorization tool per user
     digest: 66a93a2282943fac3f1339e133cba7086c9ff4b31e7665e2ebb150d2133ce265
@@ -64,4 +137,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-15T04:47:58.4838877Z"
+generated: "2024-11-15T10:14:12.775722922Z"
