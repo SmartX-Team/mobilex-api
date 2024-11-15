@@ -45,6 +45,16 @@ entries:
   data-pond:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-15T12:17:43.004029336Z"
+    description: Convenient Data Pond instance deployment tool
+    digest: fd08bd3b0a26c3c1520fbea837e511b29f135df8a7e9bef0db505fbd873fd80b
+    name: data-pond
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/data-pond-0.1.4/data-pond-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-15T12:16:38.947878331Z"
     description: Convenient Data Pond instance deployment tool
     digest: d4cb31c5b90f0899336fbead0102fdce380b5e0f1fee444b3e85361fdf068ee2
@@ -187,4 +197,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-15T12:16:38.947906233Z"
+generated: "2024-11-15T12:17:43.00406895Z"
