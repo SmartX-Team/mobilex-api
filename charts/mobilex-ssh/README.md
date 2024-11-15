@@ -1,4 +1,4 @@
-# NVIDIA ISAAC-SIM Helm Chart
+# MobileX SSH Helm Chart
 
 ## Usage
 

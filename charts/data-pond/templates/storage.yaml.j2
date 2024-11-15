@@ -1,3 +1,11 @@
+{{/*
+  When owned or shared mode, the release name should be fixed.
+*/}}
+{{- if or (contains "Owned" .Values.storageType) (contains "Shared" .Values.storageType) }}
+{{- if not (contains "object-storage-pool" .Release.Name) }}
+{{- fail "The helm release name should be \"object-storage-pool\"" }}
+{{- end }}
+{{- end }}
 ---
 apiVersion: dash.ulagbulag.io/v1alpha1
 kind: ModelStorage

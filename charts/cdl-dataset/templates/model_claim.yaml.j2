@@ -16,7 +16,7 @@ spec:
   deletionPolicy:
     {{- toYaml .Values.deletionPolicy | nindent 4 }}
   resources:
-    {{- toYaml .Values.claim.resources | nindent 4 }}
+    {{- toYaml .Values.resources | nindent 4 }}
   storage: ObjectStorage
   storageName:
     {{- toYaml .Values.static.targetStorageName | nindent 4 }}

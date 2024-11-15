@@ -11,7 +11,7 @@ spec:
     {{- toYaml .Values.deletionPolicy | nindent 4 }}
   model: {{ .Release.Name }}
   resources:
-    {{- toYaml .Values.claim.resources | nindent 4 }}
+    {{- toYaml .Values.resources | nindent 4 }}
   storage:
     {{- if .Values.static.sourceStorageName }}
     cloned:
