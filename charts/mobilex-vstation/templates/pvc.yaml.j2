@@ -9,8 +9,8 @@ metadata:
     {{- include "mobilex-vstation.labels" . | nindent 4 }}
 spec:
   accessModes:
-    {{- toYaml .Values.storage.home.accessModes | nindent 4 }}
+    {{- toYaml .Values.storage.accessModes | nindent 4 }}
   resources:
-    {{- toYaml .Values.storage.home.resources | nindent 4 }}
-  storageClassName: {{ .Values.storage.home.storageClassName }}
+    {{- toYaml .Values.storage.resources | nindent 4 }}
+  storageClassName: {{ .Values.storage.storageClassName }}
   volumeMode: Filesystem

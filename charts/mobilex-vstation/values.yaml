@@ -94,23 +94,13 @@ resources:
   #   memory: 128Mi
 
 storage:
-  home:
-    resources:
-      requests:
-        storage: 10Ti
+  resources:
+    requests:
+      storage: 10Ti
 
-    accessModes:
-      - ReadWriteOnce
-    storageClassName: ceph-block
-
-  hostKey:
-    resources:
-      requests:
-        storage: 16Mi
-
-    accessModes:
-      - ReadWriteMany
-    storageClassName: ceph-filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ceph-block
 
 terminationGracePeriodSeconds: 5
 
