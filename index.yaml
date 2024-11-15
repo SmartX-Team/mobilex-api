@@ -3,6 +3,16 @@ entries:
   cdl-dataset:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-15T12:13:41.923387727Z"
+    description: Convenient Connected Data Lake Dataset instance deployment tool
+    digest: 3d4259ea2f5d0b3b91942fc467346533014269e0b7714a1edf1254db4e081636
+    name: cdl-dataset
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/cdl-dataset-0.1.3/cdl-dataset-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-15T10:46:05.038449875Z"
     description: Convenient Connected Data Lake Dataset instance deployment tool
     digest: 562460d5349b9278e82d46f1d645848d71e27e158372915d012cb5b16e8a6c8f
@@ -167,4 +177,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-15T12:09:03.900181636Z"
+generated: "2024-11-15T12:13:41.923439975Z"
