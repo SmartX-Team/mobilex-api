@@ -1,4 +1,8 @@
 ---
+# Default values for oidc-login.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
 account:
   clusterRoleName: twin-admin
   roleName: twin-admin
