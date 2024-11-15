@@ -20,7 +20,7 @@ spec:
     {{- else if contains "Remote" .Values.storageType }}
     borrowed:
     {{- else if contains "Shared" .Values.storageType }}
-    shared:
+    cloned:
     {{- else }}
     {{- fail "value for .Values.storageType is not as expected" }}
     {{- end }}
