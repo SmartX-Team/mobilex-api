@@ -3,6 +3,16 @@ entries:
   mobilex-ssh:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-15T04:47:58.37835239Z"
+    description: Convenient SSH development session deployment tool
+    digest: 9ef5b79b626eaf275f965e2bf7568e0b20a2bcdc58484eb55c46e9932db9e4fb
+    name: mobilex-ssh
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.2/mobilex-ssh-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-14T12:19:38.097598037Z"
     description: Convenient SSH development session deployment tool
     digest: 32023f54e0808b7f7de028cea9a5cf2f329a5adeac47e2614149198d3561d803
@@ -12,6 +22,16 @@ entries:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-ssh-0.1.1/mobilex-ssh-0.1.1.tgz
     version: 0.1.1
   mobilex-vstation:
+  - apiVersion: v2
+    appVersion: latest-devel
+    created: "2024-11-15T04:47:58.483876009Z"
+    description: Convenient MobileX Station VDI deployment tool
+    digest: 9fa80f9fb87938ff491ebda986331bb3c8da1a73c7ffc86155a2a3c777a594e6
+    name: mobilex-vstation
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-vstation-0.1.2/mobilex-vstation-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: latest-devel
     created: "2024-11-14T12:21:11.450855437Z"
@@ -44,4 +64,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-14T12:21:11.676496946Z"
+generated: "2024-11-15T04:47:58.4838877Z"
