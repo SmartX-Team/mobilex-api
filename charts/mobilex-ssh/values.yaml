@@ -60,7 +60,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 22
+  port: 9894
 
 serviceAccount:
   # Specifies whether a service account should be created

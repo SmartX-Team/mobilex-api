@@ -62,7 +62,7 @@ service:
   loadBalancerIP: null
   type: ClusterIP
   ports:
-    ssh: 22
+    ssh: 9894
     vnc: 5900
 
 serviceAccount:
