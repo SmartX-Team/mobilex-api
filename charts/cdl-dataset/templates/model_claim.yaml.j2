@@ -18,6 +18,8 @@ spec:
   resources:
     {{- toYaml .Values.resources | nindent 4 }}
   storage: ObjectStorage
+  {{- if .Values.static.targetStorageName }}
   storageName:
     {{- toYaml .Values.static.targetStorageName | nindent 4 }}
+  {{- end }}
 {{- end }}
