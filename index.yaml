@@ -77,6 +77,16 @@ entries:
   mobilex-vstation:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-15T11:37:06.832034635Z"
+    description: Convenient MobileX Station VDI deployment tool
+    digest: ad0cf4cc6b8784cfcfa71b16d1816bc9cf6557eec0fc47d335061861ae81203e
+    name: mobilex-vstation
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/mobilex-vstation-0.1.4/mobilex-vstation-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-15T10:14:12.530868159Z"
     description: Convenient MobileX Station VDI deployment tool
     digest: d8dcbb0af48c82abf90940bec55562bb09f65aa2d60bb30b103427c7b5eba03a
@@ -147,4 +157,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-15T10:46:05.03847929Z"
+generated: "2024-11-15T11:37:06.832089317Z"
