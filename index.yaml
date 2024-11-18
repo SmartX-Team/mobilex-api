@@ -34,6 +34,16 @@ entries:
   cdl-endpoint:
   - apiVersion: v2
     appVersion: latest-devel
+    created: "2024-11-18T02:12:59.581872121Z"
+    description: Convenient Connected Data Lake endpoint instance deployment tool
+    digest: e719b70b275515a9a7e797e1b5c013997a947221598c36eaab3beb23f76b413d
+    name: cdl-endpoint
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/cdl-endpoint-0.1.4/cdl-endpoint-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: latest-devel
     created: "2024-11-15T10:14:12.149164828Z"
     description: Convenient Connected Data Lake endpoint instance deployment tool
     digest: f672c00865bf3838b6292c2c021c7c3a968d9cf19ba20a4085fc4d2196721189
@@ -197,4 +207,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-15T12:17:43.00406895Z"
+generated: "2024-11-18T02:12:59.581906345Z"
