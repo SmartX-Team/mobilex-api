@@ -13,9 +13,6 @@ spec:
   selector:
     matchLabels:
       app: llm
-      base: huggingface-hub
-      gpu: nvidia-a100
-      model: llama-3-70b
   strategy:
     type: Recreate # we have to reuse the gpus, not double-allocating
   template:
@@ -39,7 +36,7 @@ spec:
                       - NVIDIA-A100-SXM4-40GB
       containers:
         - name: tgi
-          image: ghcr.io/huggingface/text-generation-inference:2.3.0
+          image: ghcr.io/huggingface/text-generation-inference:2.4.0
           imagePullPolicy: Always
           args:
             - --otlp-endpoint
