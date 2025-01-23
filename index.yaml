@@ -199,6 +199,16 @@ entries:
   oidc-login:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-01-23T13:37:32.671734955Z"
+    description: Convenient OIDC authorization tool per user
+    digest: 6baec94078fdbaa207d8dd657b666c57b4862b0f2fb59d2f01190522f884ab12
+    name: oidc-login
+    type: application
+    urls:
+    - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.3/oidc-login-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: latest
     created: "2024-11-15T10:14:12.775664313Z"
     description: Convenient OIDC authorization tool per user
     digest: 8f51a8a030b465113afcbd002458dc8dadad441d193866214c8f27e6055ce1b9
@@ -217,4 +227,4 @@ entries:
     urls:
     - https://github.com/SmartX-Team/mobilex-api/releases/download/oidc-login-0.1.1/oidc-login-0.1.1.tgz
     version: 0.1.1
-generated: "2024-11-18T04:03:39.554298076Z"
+generated: "2025-01-23T13:37:32.671777765Z"
