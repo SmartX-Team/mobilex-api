@@ -27,7 +27,7 @@ If release name contains chart name it will be used as a full name.
 Expand the name of the user.
 */}}
 {{- define "oidc-login.userName" -}}
-{{- default .Chart.Name .Values.account.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Release.Name .Values.account.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
